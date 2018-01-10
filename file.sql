@@ -1,4 +1,4 @@
-CREATE TABLE `dbmassage`.`message` (
+CREATE TABLE `heroku_4af59489dcca747`.`message` (
   `idmessage` INT NOT NULL AUTO_INCREMENT,
   `idincoming` INT NOT NULL,
   `idoutgoing` INT NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE `dbmassage`.`message` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE `dbmassage`.`users` (
+CREATE TABLE `heroku_4af59489dcca747`.`users` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
   `avatar` VARCHAR(200) NOT NULL,
   `nick` VARCHAR(45) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `dbmassage`.`users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE `dbmassage`.`friends` (
+CREATE TABLE `heroku_4af59489dcca747`.`friends` (
   `idfriends` INT NOT NULL AUTO_INCREMENT,
   `iduser` INT NOT NULL,
   `idfriend` INT NOT NULL,

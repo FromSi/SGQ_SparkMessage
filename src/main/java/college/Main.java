@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         get("/", (request, response) -> "Hello World");
+
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
         post("/dialog", (request, response) -> new JDBCPOST().createMS(request));
         post("/friend", (request, response) -> new JDBCPOST().createFriends(request));

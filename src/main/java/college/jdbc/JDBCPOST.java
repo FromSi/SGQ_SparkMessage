@@ -6,9 +6,9 @@ import java.sql.*;
 
 public class JDBCPOST {
     //Ссылка, логин и пароль для входа в БД
-    private final String url = "jdbc:mysql://dbmassage.cvt4fjl91axe.us-west-2.rds.amazonaws.com:3306/dbmassage?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8";
-    private final String login = "fromsi";
-    private final String password = "vlad43284328";
+    private final String url = "jdbc:mysql://eu-cdbr-west-01.cleardb.com:3306/heroku_4af59489dcca747?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8";
+    private final String login = "b9f7039a09def9";
+    private final String password = "ca1f4a27";
     //Переменные для работы с БД в Java
     private Connection connection;
     private Statement statement;

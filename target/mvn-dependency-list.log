@@ -1,6 +1,7 @@
 
 The following files have been resolved:
    org.eclipse.jetty:jetty-client:jar:9.4.6.v20170531:compile
+   mysql:mysql-connector-java:jar:5.1.39:compile
    org.eclipse.jetty:jetty-http:jar:9.4.6.v20170531:compile
    com.sparkjava:spark-core:jar:2.7.1:compile
    javax.servlet:javax.servlet-api:jar:3.1.0:compile
@@ -15,6 +16,7 @@ The following files have been resolved:
    org.eclipse.jetty.websocket:websocket-servlet:jar:9.4.6.v20170531:compile
    org.eclipse.jetty:jetty-servlet:jar:9.4.6.v20170531:compile
    org.eclipse.jetty.websocket:websocket-common:jar:9.4.6.v20170531:compile
+   com.google.code.gson:gson:jar:2.8.2:compile
    org.eclipse.jetty:jetty-xml:jar:9.4.6.v20170531:compile
    org.eclipse.jetty.websocket:websocket-api:jar:9.4.6.v20170531:compile
 
