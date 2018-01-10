@@ -11,10 +11,10 @@ import java.util.HashMap;
 
 public class JDBCGET {
     //Ссылка, логин и пароль для входа в БД
-//    private URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
-    private final String url = "jdbc:mysql://b9f7039a09def9:ca1f4a27@eu-cdbr-west-01.cleardb.com/heroku_4af59489dcca747?reconnect=true&useUnicode=yes&characterEncoding=UTF-8";
-    private final String login = "b9f7039a09def9";
-    private final String password = "ca1f4a27";
+    private URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+    private final String url = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+    private final String login = dbUri.getUserInfo().split(":")[0];
+    private final String password = dbUri.getUserInfo().split(":")[1];
     //Переменные для работы с БД в Java
     private Connection connection;
     private Statement statement;
