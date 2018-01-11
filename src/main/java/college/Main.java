@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         get("/", (request, response) -> "Hello World");
-        get("/api/test", (request, response) -> "[{\"nick\":\"Mart\",\"number\":\"87083563850\",\"avatar\":\"http://123123.jpg\"}]");
+        get("/api/test", (request, response) -> "{\"nick\":\"Mart\",\"number\":\"87083563850\",\"avatar\":\"http://123123.jpg\"}");
 
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
         post("/dialog", (request, response) -> new JDBCPOST().createMS(request));
