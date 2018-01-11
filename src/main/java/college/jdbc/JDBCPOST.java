@@ -12,7 +12,6 @@ public class JDBCPOST {
     private final String url = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
     private final String login = dbUri.getUserInfo().split(":")[0];
     private final String password = dbUri.getUserInfo().split(":")[1];
-    //Переменные для работы с БД в Java
     private Connection connection;
     private Statement statement;
 

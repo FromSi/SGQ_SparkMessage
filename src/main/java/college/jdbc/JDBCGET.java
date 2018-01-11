@@ -92,6 +92,24 @@ public class JDBCGET {
             return "Error SQL select 1";
         }
     }
+    public String printUser() {
+        try {
+            resultSet = statement.executeQuery("select avatar,nick,login,password,number from users where iduser=1");
+            arrayList = new ArrayList<>();
+            while (resultSet.next()) {
+                hashMap = new HashMap<>();
+                hashMap.put("avatar", resultSet.getString("avatar"));
+                hashMap.put("nick", resultSet.getString("nick"));
+                hashMap.put("number", resultSet.getString("number"));
+                arrayList.add(hashMap);
+            }
+            //Возвращаем ответ
+            return new Gson().toJson(arrayList);
+        } catch (Exception e) {
+            //Возвращаем ответ
+            return "Error SQL select 1";
+        }
+    }
     public String printLogin(Request request) {
         try {
             resultSet = statement.executeQuery("select users.iduser from users where users.login='"+request.queryParams("login")+"' AND users.password='"+request.queryParams("password")+"'");
