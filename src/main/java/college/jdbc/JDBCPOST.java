@@ -38,7 +38,6 @@ public class JDBCPOST {
                         request.queryParams("login") + "', '" +
                         request.queryParams("password") + "', '" +
                         request.queryParams("number") + "')");
-                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -59,7 +58,6 @@ public class JDBCPOST {
                         request.queryParams("idoutgoing") + ", '" +
                         request.queryParams("content") + "', '" +
                         request.queryParams("date") + "')");
-                connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -75,7 +73,6 @@ public class JDBCPOST {
                 statement.execute("insert into friends (iduser,idfriend) values ('" +
                         request.queryParams("iduser") + "', '" +
                         request.queryParams("idfriend") + "')");
-                connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

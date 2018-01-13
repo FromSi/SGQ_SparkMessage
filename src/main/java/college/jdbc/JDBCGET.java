@@ -43,7 +43,6 @@ public class JDBCGET {
                 hashMap.put("idfriend", resultSet.getString("idfriend"));
                 arrayList.add(hashMap);
             }
-            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
@@ -64,14 +63,18 @@ public class JDBCGET {
                 hashMap.put("date", resultSet.getString("date"));
                 arrayList.add(hashMap);
             }
-//            statement.close();
-//            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
             //Возвращаем ответ
             return "Error SQL select 1";
-        }
+        } //finally {
+//            try {
+//                connection.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public String printUser(Request request) {
@@ -85,7 +88,6 @@ public class JDBCGET {
                 hashMap.put("number", resultSet.getString("number"));
                 arrayList.add(hashMap);
             }
-            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
@@ -100,7 +102,6 @@ public class JDBCGET {
                 hashMap = new HashMap<>();
                 hashMap.put("iduser", resultSet.getString("iduser"));
             }
-            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(hashMap);
         } catch (Exception e) {
