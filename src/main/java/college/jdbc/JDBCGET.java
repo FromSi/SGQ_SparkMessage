@@ -3,18 +3,15 @@ package college.jdbc;
 import com.google.gson.Gson;
 import spark.Request;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JDBCGET {
     //Ссылка, логин и пароль для входа в БД
-    private URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
-    private final String url = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
-    private final String login = dbUri.getUserInfo().split(":")[0];
-    private final String password = dbUri.getUserInfo().split(":")[1];
+    private final String url = "jdbc:mysql://dbmassage.cvt4fjl91axe.us-west-2.rds.amazonaws.com:3306/dbmassage?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8";
+    private final String login = "fromsi";
+    private final String password = "vlad43284328";
     //Переменные для работы с БД в Java
     private Connection connection;
     private Statement statement;
@@ -24,7 +21,7 @@ public class JDBCGET {
     private ArrayList<HashMap<String, String>> arrayList;
 
     //Конструктор
-    public JDBCGET() throws URISyntaxException {
+    public JDBCGET() {
         try {
             //Соединение с БД в Java
             connection = DriverManager.getConnection(url, login, password);
@@ -46,6 +43,7 @@ public class JDBCGET {
                 hashMap.put("idfriend", resultSet.getString("idfriend"));
                 arrayList.add(hashMap);
             }
+            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
@@ -66,6 +64,7 @@ public class JDBCGET {
                 hashMap.put("date", resultSet.getString("date"));
                 arrayList.add(hashMap);
             }
+            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
@@ -85,6 +84,7 @@ public class JDBCGET {
                 hashMap.put("number", resultSet.getString("number"));
                 arrayList.add(hashMap);
             }
+            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
         } catch (Exception e) {
@@ -99,6 +99,7 @@ public class JDBCGET {
                 hashMap = new HashMap<>();
                 hashMap.put("iduser", resultSet.getString("iduser"));
             }
+            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(hashMap);
         } catch (Exception e) {
