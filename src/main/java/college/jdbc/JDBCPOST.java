@@ -43,6 +43,12 @@ public class JDBCPOST {
                         request.queryParams("number") + "')");
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             return "success";
         } else {
@@ -63,6 +69,12 @@ public class JDBCPOST {
                         request.queryParams("date") + "')");
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             return "success";
         } else {
@@ -78,6 +90,12 @@ public class JDBCPOST {
                         request.queryParams("idfriend") + "')");
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             return "success";
         } else {

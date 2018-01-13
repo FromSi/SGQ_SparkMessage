@@ -51,6 +51,12 @@ public class JDBCGET {
         } catch (Exception e) {
             //Возвращаем ответ
             return "Error SQL select 1";
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -96,6 +102,12 @@ public class JDBCGET {
         } catch (Exception e) {
             //Возвращаем ответ
             return "Error SQL select 1";
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
     public String printLogin(Request request) {
@@ -110,6 +122,12 @@ public class JDBCGET {
         } catch (Exception e) {
             //Возвращаем ответ
             return "Error SQL select 1";
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
