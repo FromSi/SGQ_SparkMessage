@@ -64,7 +64,7 @@ public class JDBCGET {
                 hashMap.put("date", resultSet.getString("date"));
                 arrayList.add(hashMap);
             }
-            statement.close();
+//            statement.close();
 //            connection.close();
             //Возвращаем ответ
             return new Gson().toJson(arrayList);
