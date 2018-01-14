@@ -23,7 +23,8 @@ public class Main {
         post("/dialog", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
                 if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing"))) {
-                    usersCBK.get(i).setNotification(true);
+                    usersCBK.get(i).setCheck(true);
+                    usersCBK.get(i).setNotif(true);
                     return new JDBCPOST().createMS(request);
                 }
             }
@@ -31,12 +32,22 @@ public class Main {
         });
         post("/friend", (request, response) -> new JDBCPOST().createFriends(request));
         get("/dialog", (request, response) -> new JDBCGET().printMessage(request));
-        get("/notification", (request, response) -> {
+        get("/dialog-check", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
                 if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing")))
-                    if (usersCBK.get(i).isNotification()) {
-                        usersCBK.get(i).setNotification(false);
-                        return new JDBCGET().printMessage(request);
+                    if (usersCBK.get(i).isCheck()) {
+                        usersCBK.get(i).setCheck(false);
+                        return new JDBCGET().printDialogCheck(request);
+                    }
+            }
+            return null;
+        });
+        get("/dialog-notif", (request, response) -> {
+            for (int i = 0; i < usersCBK.size(); i++) {
+                if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing")))
+                    if (usersCBK.get(i).isNotif()) {
+                        usersCBK.get(i).setNotif(false);
+                        return new JDBCGET().printDialogCheck(request);
                     }
             }
             return null;

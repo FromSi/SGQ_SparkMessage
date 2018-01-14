@@ -38,9 +38,10 @@ public class JDBCGET {
         }
 
     }
+
     public String printFriends(Request request) {
         try {
-            resultSet = statement.executeQuery("select idfriend from friends where friends.iduser="+request.queryParams("iduser"));
+            resultSet = statement.executeQuery("select idfriend from friends where friends.iduser=" + request.queryParams("iduser"));
             arrayList = new ArrayList<>();
             while (resultSet.next()) {
                 hashMap = new HashMap<>();
@@ -63,7 +64,7 @@ public class JDBCGET {
 
     public String printMessage(Request request) {
         try {
-            resultSet = statement.executeQuery("select idincoming, idoutgoing, content, message.date from message where idincoming="+request.queryParams("idincoming")+" AND idoutgoing="+request.queryParams("idoutgoing"));
+            resultSet = statement.executeQuery("select idincoming, idoutgoing, content, message.date from message where idincoming=" + request.queryParams("idincoming") + " AND idoutgoing=" + request.queryParams("idoutgoing"));
             arrayList = new ArrayList<>();
             while (resultSet.next()) {
                 hashMap = new HashMap<>();
@@ -89,7 +90,7 @@ public class JDBCGET {
 
     public String printUser(Request request) {
         try {
-            resultSet = statement.executeQuery("select avatar,nick,login,password,number from users where iduser="+request.queryParams("iduser"));
+            resultSet = statement.executeQuery("select avatar,nick,login,password,number from users where iduser=" + request.queryParams("iduser"));
 //            arrayList = new ArrayList<>();
             while (resultSet.next()) {
                 hashMap = new HashMap<>();
@@ -111,12 +112,39 @@ public class JDBCGET {
             }
         }
     }
+
     public String printLogin(Request request) {
         try {
-            resultSet = statement.executeQuery("select users.iduser from users where users.login='"+request.queryParams("login")+"' AND users.password='"+request.queryParams("password")+"'");
+            resultSet = statement.executeQuery("select users.iduser from users where users.login='" + request.queryParams("login") + "' AND users.password='" + request.queryParams("password") + "'");
             while (resultSet.next()) {
                 hashMap = new HashMap<>();
                 hashMap.put("iduser", resultSet.getString("iduser"));
+            }
+            //Возвращаем ответ
+            return new Gson().toJson(hashMap);
+        } catch (Exception e) {
+            //Возвращаем ответ
+            return "Error SQL select 1";
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String printDialogCheck(Request request) {
+        try {
+            resultSet = statement.executeQuery("select idincoming, idoutgoing, content, message.date from message where idincoming=" +
+                    request.queryParams("idincoming") + " AND idoutgoing=" +
+                    request.queryParams("idoutgoing") + " ORDER BY idmessage DESC LIMIT 1");
+            while (resultSet.next()) {
+                hashMap = new HashMap<>();
+                hashMap.put("idincoming", resultSet.getString("idincoming"));
+                hashMap.put("idoutgoing", resultSet.getString("idoutgoing"));
+                hashMap.put("content", resultSet.getString("content"));
+                hashMap.put("date", resultSet.getString("date"));
             }
             //Возвращаем ответ
             return new Gson().toJson(hashMap);

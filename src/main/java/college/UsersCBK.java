@@ -1,20 +1,30 @@
 package college;
 
 public class UsersCBK {
-    private boolean notification;
+    private boolean check;
+    private boolean notif;
     private String idUser;
 
     public UsersCBK(String idUser) {
-        this.notification = false;
+        this.check = false;
+        this.notif = false;
         this.idUser = idUser;
     }
 
-    public boolean isNotification() {
-        return notification;
+    public boolean isCheck() {
+        return check;
     }
 
-    public void setNotification(boolean notification) {
-        this.notification = notification;
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public boolean isNotif() {
+        return notif;
+    }
+
+    public void setNotif(boolean notif) {
+        this.notif = notif;
     }
 
     public String getIdUser() {
