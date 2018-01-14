@@ -2,9 +2,9 @@ package college;
 
 public class UsersCBK {
     private boolean notification;
-    private int idUser;
+    private String idUser;
 
-    public UsersCBK(int idUser) {
+    public UsersCBK(String idUser) {
         this.notification = false;
         this.idUser = idUser;
     }
@@ -17,11 +17,11 @@ public class UsersCBK {
         this.notification = notification;
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 }

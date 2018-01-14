@@ -20,7 +20,7 @@ public class Main {
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
         post("/dialog", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
-                if (usersCBK.get(i).getIdUser() == Integer.parseInt(request.queryParams("idoutgoing"))) {
+                if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing"))) {
                     usersCBK.get(i).setNotification(true);
                     return new JDBCPOST().createMS(request);
                 }
@@ -31,7 +31,7 @@ public class Main {
         get("/dialog", (request, response) -> new JDBCGET().printMessage(request));
         get("/notification", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
-                if (usersCBK.get(i).getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
+                if (usersCBK.get(i).getIdUser().equals(request.queryParams("idincoming")))
                     if (usersCBK.get(i).isNotification()) {
                         usersCBK.get(i).setNotification(false);
                         return new JDBCGET().printMessage(request);

@@ -35,7 +35,7 @@ public class JDBCBEGIN {
         try {
             resultSet = statement.executeQuery("select iduser from users");
             while (resultSet.next()) {
-                usersCBKS.add(new UsersCBK(resultSet.getInt("iduser")));
+                usersCBKS.add(new UsersCBK(resultSet.getString("iduser")));
             }
             //Возвращаем ответ
             return usersCBKS;
