@@ -9,12 +9,12 @@ import static spark.Spark.*;
 
 public class Main {
     private static List<UsersCBK> usersCBK;
-
     public static void main(String[] args) throws URISyntaxException {
         port(getHerokuAssignedPort());
 
         usersCBK = new JDBCBEGIN().addNotifAll();
-
+        System.out.print(usersCBK.get(0).getIdUser());
+        System.out.print(usersCBK.get(1).getIdUser());
         get("/", (request, response) -> "Hello World");
 
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
