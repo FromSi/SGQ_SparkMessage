@@ -23,19 +23,19 @@ public class Main {
                     return new JDBCPOST().createMS(request);
                 }
             }
-            return "null";
+            return null;
         });
         post("/friend", (request, response) -> new JDBCPOST().createFriends(request));
         get("/dialog", (request, response) -> new JDBCGET().printMessage(request));
         get("/notification", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
-                if (usersCBK.get(i).getIdUser().equals(request.queryParams("idincoming")))
+                if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing")))
                     if (usersCBK.get(i).isNotification()) {
                         usersCBK.get(i).setNotification(false);
                         return new JDBCGET().printMessage(request);
                     }
             }
-            return "null";
+            return null;
         });
         get("/friend", (request, response) -> new JDBCGET().printFriends(request));
         get("/profile", (request, response) -> new JDBCGET().printUser(request));
