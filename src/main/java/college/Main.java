@@ -13,9 +13,7 @@ public class Main {
         port(getHerokuAssignedPort());
 
         usersCBK = new JDBCBEGIN().addNotifAll();
-        System.out.print(usersCBK.get(0).getIdUser());
-        System.out.print(usersCBK.get(1).getIdUser());
-        get("/", (request, response) -> "Hello World");
+        get("/", (request, response) -> usersCBK.get(0).getIdUser() + " --- "+usersCBK.get(1).getIdUser());
 
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
         post("/dialog", (request, response) -> {
