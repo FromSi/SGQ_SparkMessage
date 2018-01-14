@@ -22,10 +22,10 @@ public class Main {
             for (int i = 0; i < usersCBK.size(); i++) {
                 if (usersCBK.get(i).getIdUser() == Integer.parseInt(request.queryParams("idoutgoing"))) {
                     usersCBK.get(i).setNotification(true);
-                    System.out.print(usersCBK.get(i).getIdUser() +" --- "+request.queryParams("idoutgoing"));
+                    return new JDBCPOST().createMS(request);
                 }
             }
-            return new JDBCPOST().createMS(request);
+            return "null";
         });
         post("/friend", (request, response) -> new JDBCPOST().createFriends(request));
         get("/dialog", (request, response) -> new JDBCGET().printMessage(request));
@@ -34,11 +34,10 @@ public class Main {
                 if (usersCBK.get(i).getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
                     if (usersCBK.get(i).isNotification()) {
                         usersCBK.get(i).setNotification(false);
-                        System.out.print(usersCBK.get(i).getIdUser() +" --- "+request.queryParams("idincoming"));
                         return new JDBCGET().printMessage(request);
                     }
             }
-            return null;
+            return "null";
         });
         get("/friend", (request, response) -> new JDBCGET().printFriends(request));
         get("/profile", (request, response) -> new JDBCGET().printUser(request));
