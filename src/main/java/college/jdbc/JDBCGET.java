@@ -22,25 +22,11 @@ public class JDBCGET {
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
-    private List<UsersCBK> usersCBK;
     private HashMap<String, String> hashMap;
     private ArrayList<HashMap<String, String>> arrayList;
 
     //Конструктор
     public JDBCGET() throws URISyntaxException {
-        try {
-            //Соединение с БД в Java
-            connection = DriverManager.getConnection(url, login, password);
-            //Передаем управление БД statement
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            //Возвращаем ответ в консоль
-            System.out.println("Error SQL Connecting");
-        }
-
-    }
-    public JDBCGET(List<UsersCBK> usersCBK) throws URISyntaxException {
-        this.usersCBK = usersCBK;
         try {
             //Соединение с БД в Java
             connection = DriverManager.getConnection(url, login, password);
@@ -144,17 +130,5 @@ public class JDBCGET {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String notification(Request request, Response response) {
-        for (UsersCBK usersCBK: usersCBK) {
-            if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
-                if (usersCBK.isNotification()) {
-                    usersCBK.setNotification(false);
-                    return printMessage(request);
-                }
-        }
-        response.status(401);
-        return "null";
     }
 }
