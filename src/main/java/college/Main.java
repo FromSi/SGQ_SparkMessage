@@ -12,7 +12,6 @@ public class Main {
     private static List<UsersCBK> usersCBK;
     public static void main(String[] args) throws URISyntaxException {
         port(getHerokuAssignedPort());
-        usersCBK = new ArrayList<>();
         usersCBK = new JDBCBEGIN().addNotifAll();
         get("/", (request, response) -> usersCBK.get(0).getIdUser() + " --- "+usersCBK.get(1).getIdUser());
 
