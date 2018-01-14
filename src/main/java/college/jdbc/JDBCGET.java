@@ -148,10 +148,11 @@ public class JDBCGET {
 
     public String notification(Request request, Response response) {
         for (UsersCBK usersCBK: usersCBK) {
-            if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idincoming"))) {
-                usersCBK.setNotification(false);
-                return printMessage(request);
-            }
+            if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
+                if (usersCBK.isNotification()) {
+                    usersCBK.setNotification(false);
+                    return printMessage(request);
+                }
         }
         response.status(401);
         return "null";
