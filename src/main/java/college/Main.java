@@ -9,6 +9,7 @@ import static spark.Spark.*;
 
 public class Main {
     private static List<UsersCBK> usersCBK;
+
     public static void main(String[] args) throws URISyntaxException {
         port(getHerokuAssignedPort());
 
@@ -18,19 +19,19 @@ public class Main {
 
         post("/user", (request, response) -> new JDBCPOST().createUser(request));
         post("/dialog", (request, response) -> {
-            for (UsersCBK usersCBK: usersCBK) {
-                if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idoutgoing")))
-                    usersCBK.setNotification(true);
+            for (int i = 0; i < usersCBK.size(); i++) {
+                if (usersCBK.get(1).getIdUser() == Integer.parseInt(request.queryParams("idoutgoing")))
+                    usersCBK.get(1).setNotification(true);
             }
             return new JDBCPOST().createMS(request);
         });
         post("/friend", (request, response) -> new JDBCPOST().createFriends(request));
         get("/dialog", (request, response) -> new JDBCGET().printMessage(request));
         get("/notification", (request, response) -> {
-            for (UsersCBK usersCBK: usersCBK) {
-                if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
-                    if (usersCBK.isNotification()) {
-                        usersCBK.setNotification(false);
+            for (int i = 0; i < usersCBK.size(); i++) {
+                if (usersCBK.get(1).getIdUser() == Integer.parseInt(request.queryParams("idincoming")))
+                    if (usersCBK.get(1).isNotification()) {
+                        usersCBK.get(1).setNotification(false);
                         return new JDBCGET().printMessage(request);
                     }
             }
