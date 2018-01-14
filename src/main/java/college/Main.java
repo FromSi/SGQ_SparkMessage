@@ -15,7 +15,11 @@ public class Main {
         usersCBK = new JDBCBEGIN().addNotifAll();
         get("/", (request, response) -> usersCBK.get(0).getIdUser() + " --- "+usersCBK.get(1).getIdUser());
 
-        post("/user", (request, response) -> new JDBCPOST().createUser(request));
+        post("/user", (request, response) -> {
+            String str1 = new JDBCPOST().createUser(request);
+            usersCBK = new JDBCBEGIN().addNotif(usersCBK);
+            return str1;
+        });
         post("/dialog", (request, response) -> {
             for (int i = 0; i < usersCBK.size(); i++) {
                 if (usersCBK.get(i).getIdUser().equals(request.queryParams("idoutgoing"))) {

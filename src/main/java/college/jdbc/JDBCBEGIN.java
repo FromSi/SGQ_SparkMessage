@@ -50,4 +50,23 @@ public class JDBCBEGIN {
             }
         }
     }
+    public List<UsersCBK> addNotif(List<UsersCBK> usersCBK){
+        try {
+            resultSet = statement.executeQuery("select iduser from users order by iduser desc limit 1");
+            while (resultSet.next()) {
+                usersCBK.add(new UsersCBK(resultSet.getString("iduser")));
+            }
+            //Возвращаем ответ
+            return usersCBK;
+        } catch (Exception e) {
+            //Возвращаем ответ
+            return usersCBK;
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
