@@ -1,13 +1,16 @@
 package college.jdbc;
 
+import college.UsersCBK;
 import com.google.gson.Gson;
 import spark.Request;
+import spark.Response;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class JDBCGET {
     //Ссылка, логин и пароль для входа в БД
@@ -19,7 +22,7 @@ public class JDBCGET {
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
-
+    private List<UsersCBK> usersCBK;
     private HashMap<String, String> hashMap;
     private ArrayList<HashMap<String, String>> arrayList;
 
@@ -36,7 +39,19 @@ public class JDBCGET {
         }
 
     }
+    public JDBCGET(List<UsersCBK> usersCBK) throws URISyntaxException {
+        this.usersCBK = usersCBK;
+        try {
+            //Соединение с БД в Java
+            connection = DriverManager.getConnection(url, login, password);
+            //Передаем управление БД statement
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            //Возвращаем ответ в консоль
+            System.out.println("Error SQL Connecting");
+        }
 
+    }
     public String printFriends(Request request) {
         try {
             resultSet = statement.executeQuery("select idfriend from friends where friends.iduser="+request.queryParams("iduser"));
@@ -89,16 +104,16 @@ public class JDBCGET {
     public String printUser(Request request) {
         try {
             resultSet = statement.executeQuery("select avatar,nick,login,password,number from users where iduser="+request.queryParams("iduser"));
-            arrayList = new ArrayList<>();
+//            arrayList = new ArrayList<>();
             while (resultSet.next()) {
                 hashMap = new HashMap<>();
                 hashMap.put("avatar", resultSet.getString("avatar"));
                 hashMap.put("nick", resultSet.getString("nick"));
                 hashMap.put("number", resultSet.getString("number"));
-                arrayList.add(hashMap);
+//                arrayList.add(hashMap);
             }
             //Возвращаем ответ
-            return new Gson().toJson(arrayList);
+            return new Gson().toJson(hashMap);
         } catch (Exception e) {
             //Возвращаем ответ
             return "Error SQL select 1";
@@ -129,5 +144,16 @@ public class JDBCGET {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String notification(Request request, Response response) {
+        for (UsersCBK usersCBK: usersCBK) {
+            if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idincoming"))) {
+                usersCBK.setNotification(false);
+                return printMessage(request);
+            }
+        }
+        response.status(401);
+        return "null";
     }
 }

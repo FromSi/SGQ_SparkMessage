@@ -1,10 +1,12 @@
 package college.jdbc;
 
+import college.UsersCBK;
 import spark.Request;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
+import java.util.List;
 
 public class JDBCPOST {
     //Ссылка, логин и пароль для входа в БД
@@ -15,7 +17,7 @@ public class JDBCPOST {
     //Переменные для работы с БД в Java
     private Connection connection;
     private Statement statement;
-
+    private List<UsersCBK> usersCBK;
     public JDBCPOST() throws URISyntaxException {
         try {
             //Соединение с БД в Java
@@ -27,7 +29,18 @@ public class JDBCPOST {
             System.out.println("Error SQL Connecting");
         }
     }
-
+    public JDBCPOST(List<UsersCBK> usersCBK) throws URISyntaxException {
+        this.usersCBK = usersCBK;
+        try {
+            //Соединение с БД в Java
+            connection = DriverManager.getConnection(url, login, password);
+            //Передаем управление БД statement
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            //Возвращаем ответ в консоль
+            System.out.println("Error SQL Connecting");
+        }
+    }
     public String createUser(Request request) {
         if (request.queryParams("avatar").length() >= 4 &&
                 request.queryParams("nick").length() >= 4 &&
@@ -67,6 +80,10 @@ public class JDBCPOST {
                         request.queryParams("idoutgoing") + ", '" +
                         request.queryParams("content") + "', '" +
                         request.queryParams("date") + "')");
+                for (UsersCBK usersCBK: usersCBK) {
+                    if (usersCBK.getIdUser() == Integer.parseInt(request.queryParams("idoutgoing")))
+                        usersCBK.setNotification(true);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
